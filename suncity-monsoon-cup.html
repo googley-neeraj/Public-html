@@ -1,333 +1,166 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Suncity Monsoon Cup 2025 Schedule</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <!-- Chosen Palette: Calm Harmony (Light Slate, Deep Indigo, Warm Amber) -->
-
     <!-- Application Structure Plan: A dashboard layout with key stat cards, interactive filter buttons (All, Group A, Group B), and a responsive card-based grid for the match schedule. This provides a clear overview and allows users to easily drill down into specific group matches. A final section explains the tournament progression for context. -->
-
     <!-- Visualization & Content Choices: Report Info: Match schedule. Goal: Organize/Inform. Viz/Presentation: Interactive card grid. Interaction: JS-powered filtering by group. Justification: More engaging and mobile-friendly than a static table. Library/Method: Vanilla JS and Tailwind CSS. -->
-
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <style>
-
         body {
-
             font-family: 'Inter', sans-serif;
-
             background-color: #f8fafc; /* slate-50 */
-
         }
-
         .active-filter {
-
             background-color: #4338ca !important; /* indigo-700 */
-
             color: white !important;
-
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-
         }
-
         .match-card {
-
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-
         }
-
         .match-card:hover {
-
             transform: translateY(-4px);
-
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
         }
-
     </style>
-
 </head>
-
 <body class="text-gray-800">
-
-
 
     <div class="container mx-auto p-4 md:p-8 max-w-7xl">
 
-
-
         <header class="text-center mb-8 md:mb-12">
-
             <h1 class="text-4xl md:text-5xl font-bold text-indigo-800">Suncity Monsoon Cup 2025</h1>
-
             <p class="text-lg text-gray-600 mt-2 mb-4">Official Match Schedule & Tournament Hub</p>
-
             <p class="text-center text-gray-600 mb-6">View the tournament rules or follow live match scores and updates on Cricheroes.</p>
-
             <!-- Updated links section -->
-
             <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-
                 <a href="monsoon-cup-rules.html" class="inline-block px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold transition-transform duration-200 hover:scale-105 hover:bg-indigo-700 shadow-md">View Tournament Rules</a>
-
                 <a href="https://cricheroes.com/tournament/1599348/suncity-monsoon-cup-2025/matches/live-matches" target="_blank" class="inline-block px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold transition-transform duration-200 hover:scale-105 hover:bg-indigo-700 shadow-md">Follow on Cricheroes</a>
-
             </div>
-
         </header>
 
-
-
         <main>
-
             <section id="stats" class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
-
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
-
                     <p class="text-4xl font-bold text-amber-500">6</p>
-
                     <p class="text-gray-500 font-medium">Total Teams</p>
-
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
-
                     <p class="text-4xl font-bold text-amber-500">9</p>
-
                     <p class="text-gray-500 font-medium">Total Matches</p>
-
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
-
                     <p class="text-4xl font-bold text-amber-500">2</p>
-
                     <p class="text-gray-500 font-medium">Groups</p>
-
                 </div>
-
             </section>
-
-
 
             <section id="schedule">
-
                 <div class="bg-white p-6 rounded-xl shadow-md">
-
                     <h2 class="text-2xl font-bold text-indigo-800 mb-6 text-center">Group Stage Matches</h2>
-
                     
-
                     <div id="filter-buttons" class="flex justify-center space-x-2 md:space-x-4 mb-8">
-
                         <button class="filter-btn active-filter text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-gray-200 text-gray-700 transition-all duration-300" data-group="all">All Matches</button>
-
                         <button class="filter-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-gray-200 text-gray-700 transition-all duration-300" data-group="group-a">Group A</button>
-
                         <button class="filter-btn text-sm md:text-base font-semibold py-2 px-4 rounded-full bg-gray-200 text-gray-700 transition-all duration-300" data-group="group-b">Group B</button>
-
                     </div>
-
-
 
                     <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
                     </div>
-
                 </div>
-
             </section>
-
             
-
             <section id="tournament-format" class="mt-8 md:mt-12">
-
                     <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-
                         <h2 class="text-2xl font-bold text-indigo-800 mb-4 text-center">Tournament Format</h2>
-
                         <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-
                             The tournament begins with a thrilling group stage. The six competing teams are divided into two groups of three. Each team will play every other team in their group once in a round-robin format. The stakes are high as only the top two teams from each group will advance to the knockout rounds.
-
                         </p>
-
                         <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 text-center">
-
                             <div class="p-4 rounded-lg">
-
                                 <p class="font-bold text-lg text-indigo-700">Group Stage</p>
-
                                 <p class="text-sm text-gray-500">Top 2 from each group qualify</p>
-
                             </div>
-
                             <div class="text-2xl font-bold text-amber-500 transform md:rotate-0 rotate-90">&rarr;</div>
-
                             <div class="p-4 rounded-lg">
-
                                 <p class="font-bold text-lg text-indigo-700">Semi-Finals</p>
-
                                 <p class="text-sm text-gray-500">Winner A vs Runner-up B<br>Winner B vs Runner-up A</p>
-
                             </div>
-
                             <div class="text-2xl font-bold text-amber-500 transform md:rotate-0 rotate-90">&rarr;</div>
-
                             <div class="p-4 rounded-lg">
-
                                 <p class="font-bold text-lg text-indigo-700">Final</p>
-
                                 <p class="text-sm text-gray-500">Winners of Semi-Finals</p>
-
                             </div>
-
                         </div>
-
                     </div>
-
             </section>
-
-
 
         </main>
-
     </div>
 
-
-
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
-
             const scheduleData = [
-
-                { date: 'Saturday, 6th Sep', time: '6:45 AM', team1: 'Team 1', team2: 'Team 2', group: 'Group A', dataGroup: 'group-a' },
-
-                { date: 'Saturday, 6th Sep', time: '7:45 AM', team1: 'Team 4', team2: 'Team 5', group: 'Group B', dataGroup: 'group-b' },
-
-                { date: 'Saturday, 6th Sep', time: '8:45 AM', team1: 'Team 3', team2: 'Team 1', group: 'Group A', dataGroup: 'group-a' },
-
-                { date: 'Sunday, 7th Sep', time: '6:45 AM', team1: 'Team 6', team2: 'Team 4', group: 'Group B', dataGroup: 'group-b' },
-
-                { date: 'Sunday, 7th Sep', time: '7:45 AM', team1: 'Team 2', team2: 'Team 3', group: 'Group A', dataGroup: 'group-a' },
-
-                { date: 'Sunday, 7th Sep', time: '8:45 AM', team1: 'Team 5', team2: 'Team 6', group: 'Group B', dataGroup: 'group-b' }
-
+                { date: 'Saturday, 6th Sep', time: '6:45 AM', team1: 'Monsoon Mavericks', team2: 'Baavle Badal', group: 'Group A', dataGroup: 'group-a' },
+                { date: 'Saturday, 6th Sep', time: '7:45 AM', team1: 'Bheege Bhediye', team2: 'Raptors Storm', group: 'Group B', dataGroup: 'group-b' },
+                { date: 'Saturday, 6th Sep', time: '8:45 AM', team1: 'Duckworth Lewis XI', team2: 'Monsoon Mavericks', group: 'Group A', dataGroup: 'group-a' },
+                { date: 'Sunday, 7th Sep', time: '6:45 AM', team1: 'Barsati Mendaks', team2: 'Bheege Bhediye', group: 'Group B', dataGroup: 'group-b' },
+                { date: 'Sunday, 7th Sep', time: '7:45 AM', team1: 'Baavle Badal', team2: 'Duckworth Lewis XI', group: 'Group A', dataGroup: 'group-a' },
+                { date: 'Sunday, 7th Sep', time: '8:45 AM', team1: 'Raptors Storm', team2: 'Barsati Mendaks', group: 'Group B', dataGroup: 'group-b' }
             ];
 
-
-
             const scheduleGrid = document.getElementById('schedule-grid');
-
             const filterButtons = document.querySelectorAll('.filter-btn');
 
-
-
             function createMatchCard(match) {
-
                 return `
-
                     <div class="match-card bg-slate-50 border border-slate-200 rounded-lg p-5" data-group="${match.dataGroup}">
-
                         <div class="flex justify-between items-center mb-4">
-
                             <span class="font-bold text-indigo-600">${match.group}</span>
-
                             <span class="text-sm font-medium text-gray-500">${match.date}</span>
-
                         </div>
-
                         <div class="text-center my-4">
-
-                            <p class="text-xl font-semibold">${match.team1}</p>
-
+                            <p class="text-base font-semibold">${match.team1}</p>
                             <p class="text-sm font-bold text-amber-500 my-1">vs</p>
-
-                            <p class="text-xl font-semibold">${match.team2}</p>
-
+                            <p class="text-base font-semibold">${match.team2}</p>
                         </div>
-
                         <div class="text-center mt-4 border-t border-slate-200 pt-3">
-
                             <p class="text-gray-700 font-semibold">${match.time}</p>
-
                         </div>
-
-                    </div>
-
                 `;
-
             }
-
-
 
             function renderSchedule(data) {
-
                 scheduleGrid.innerHTML = data.map(createMatchCard).join('');
-
             }
-
-
 
             function filterMatches(group) {
-
                 const matchCards = document.querySelectorAll('.match-card');
-
                 matchCards.forEach(card => {
-
                     if (group === 'all' || card.dataset.group === group) {
-
                         card.style.display = 'block';
-
                     } else {
-
                         card.style.display = 'none';
-
                     }
-
                 });
-
             }
 
-
-
             filterButtons.forEach(button => {
-
                 button.addEventListener('click', () => {
-
                     filterButtons.forEach(btn => btn.classList.remove('active-filter'));
-
                     button.classList.add('active-filter');
-
                     const group = button.dataset.group;
-
                     filterMatches(group);
-
                 });
-
             });
 
-
-
             renderSchedule(scheduleData);
-
         });
-
     </script>
-
 </body>
-
 </html>
